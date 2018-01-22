@@ -14,7 +14,6 @@ import {
 import ReactCardFlip from 'react-card-flip';
 import FlipCard from 'react-native-flip-card';
 
-
 let images = [
         {id:0, src:"😜", visible: false},
         {id:1, src:"🌴", visible: false},
@@ -22,6 +21,7 @@ let images = [
         {id:3, src:"😂", visible: false},
         {id:4, src:"💩", visible: false},
         {id:5, src:"😘", visible: false},
+
     ];
 
 export class Card extends React.Component {
@@ -42,14 +42,16 @@ export class Card extends React.Component {
   }
 
 	render(){
-    let pickedImages = images.map((image, id) =>
 
-  <TouchableHighlight  style={styles.imageContainer} onPress ={this.clickedItem.bind(this)} ><Text style={styles.imageStyle}>{image.src}</Text>
+ let pickedImages = images.map((image, id) =>
+
+  <TouchableHighlight  style={styles.imageContainer} onPress ={this.clickedItem.bind(this)} >
+    <Text style={styles.imageStyle}>{image.src}</Text>
   </TouchableHighlight>);
 
     return (
       <View style={styles.mainContainer}>
-        <Text>{pickedImages}</Text>
+       <Text>{pickedImages}</Text>
       </View>
 		);
 	}
@@ -98,7 +100,7 @@ export class Card extends React.Component {
 */
 const styles = StyleSheet.create({
   mainContainer: {
-    flex: 2,
+    flex: 1,
     width: '100%',
     height:'100%',
     alignItems: 'center',
@@ -115,7 +117,7 @@ const styles = StyleSheet.create({
 
 	},
 	imageStyle: {
-    fontSize: 50,
+    fontSize: 60,
     alignItems: 'center',
 	},
   face:{
