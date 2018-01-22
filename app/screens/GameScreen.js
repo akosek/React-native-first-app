@@ -10,8 +10,7 @@ class GameScreen extends Component {
     render() {
         return (
           <View>
-						<Text>Heeej tu bedzie gra!</Text>
-						<Card/>
+            <Card />
 					</View>
         );
     }
