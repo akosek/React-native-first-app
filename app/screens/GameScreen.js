@@ -1,16 +1,17 @@
+
 import {
     StyleSheet,
     Text,
     View
 } from 'react-native';
 import React, { Component } from 'react';
-import {Card} from '../components/Card'
+import { CardBoard } from '../components/CardBoard.js';
 
 class GameScreen extends Component {
     render() {
         return (
           <View>
-            <Card />
+            <CardBoard />
 					</View>
         );
     }
