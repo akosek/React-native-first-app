@@ -22,7 +22,7 @@ let images = [
         {id:6, src:"😲", visible: false},
         {id:7, src:"🤐", visible: false},
         {id:8, src:"😴", visible: false},
-        {id:8, src:"🤕", visible: false},
+        {id:9, src:"🤕", visible: false},
 
     ];
 
@@ -37,10 +37,11 @@ export class CardBoard extends React.Component {
                 }
           )
 
-     let pickedImages = cardImages.map((image,id) =>
+     let pickedImages = cardImages.map((image, index) =>
           <Card
-              key={id}
+              key={image.index}
               image={image.src}
+              visible={image.visible}
           />
       );
 
@@ -52,6 +53,39 @@ export class CardBoard extends React.Component {
   }
 }
 
+class Timer extends React.Component {
+  constructor(props){
+    super(props);
+
+    this.state = {on: false, time:0};
+    this.timerId = 0;
+  }
+
+  // when component is celaring up
+  componentWillUnmount(){
+    this.clearTimer();
+  }
+
+    update() {
+
+    }
+
+    startTimer(){
+      this.setState({on:true});
+      this.timerId = setInterval(()=> {this.update();
+      }, 2000);
+    }
+
+    pauseTimer(){
+      clearTimer();
+    }
+
+    clearTimer(){
+      clearInterval(this.timerId);
+    }
+}
+
+
 class Card extends React.Component {
 
           constructor(props){
@@ -61,20 +95,24 @@ class Card extends React.Component {
 
           onPress = () => {
             console.log('pressed ' + this.props.image);
+
           }
 
           toogleCard = () => {
             this.setState({visible: !this.state.visible});
+            console.log(this.props.image);
           }
+
           render() {
-            
-              setTimeout(function(){
+      /*        setTimeout(function(){
                   this.setState({visible:true});
-                }.bind(this),3000);
+                }.bind(this),3000);*/
 
             return (
               <TouchableHighlight style={styles.imageContainer} onPress={this.toogleCard.bind(this)}>
-                <Text style={this.state.visible ? styles.imageHide: styles.imageStyle}> {this.props.image} </Text>
+                <Text style={this.state.visible ? styles.imageHide: styles.imageStyle}>
+                   {this.props.image} </Text>
+
               </TouchableHighlight>
             );
           }

@@ -1,104 +1,32 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+	Image,
+  TouchableHighlight,
+  Animated
 } from 'react-native';
-import Card from 'Card';
+import { List, ListItem, Button } from 'react-native-elements';
+import { CardBoard } from 'CardBoard';
 
-function initialCards() {
-  return [
-    {value: 2, matched: false, flipped: false},
-    {value: 4, matched: false, flipped: false},
-    {value: 1, matched: false, flipped: false},
-    {value: 1, matched: false, flipped: false},
-    {value: 3, matched: false, flipped: false},
-    {value: 4, matched: false, flipped: false},
-    {value: 2, matched: false, flipped: false},
-    {value: 3, matched: false, flipped: false}
-  ];
-}
 
-export default class Game extends Component {
-  constructor(props) {
-    super(props);
-    this.renderCards = this.renderCards.bind(this);
-    this.checkMatch = this.checkMatch.bind(this);
-    this.reset = this.reset.bind(this);
+class Game extends React.Component {
+	constructor(props){
+		super(props);
 
-    this.state = {
-      cards: initialCards(),
-      lastCard: null,
-      locked: false,
-      matches: 0
-    };
-  }
+	}
 
-  checkMatch(value, id) {
-    if (this.state.locked) {
-      return;
-    }
+	setTimeout(function(){
+			this.setState({visible:true});
+		}.bind(this),3000);
 
-    var cards = this.state.cards;
-    cards[id].flipped = true;
-    this.setState({cards, locked: true});
-    if (this.state.lastCard) {
-      if (value === this.state.lastCard.value) {
-        var matches = this.state.matches;
-        cards[id].matched = true;
-        cards[this.state.lastCard.id].matched = true;
-        this.setState({cards, lastCard: null, locked: false, matches: matches + 1});
-      } else {
-        setTimeout(() => {
-          cards[id].flipped = false;
-          cards[this.state.lastCard.id].flipped = false;
-          this.setState({cards, lastCard: null, locked: false});
-        }, 1000);
-      }
-    } else {
-      this.setState({
-        lastCard: {id, value},
-        locked: false
-      });
-    }
-  }
+	render(){
 
-  renderCards(cards) {
-    return cards.map((card, index) => {
-      return (
-        <Card
-          key={index}
-          value={card.value}
-          id={index}
-          matched={card.matched}
-          flipped={card.flipped}
-          checkMatch={this.checkMatch} />
-      );
-    });
-  }
 
-  reset() {
-    this.setState({
-      cards: initialCards(),
-      lastCard: null,
-      locked: false,
-      matches: 0
-    });
-  }
 
-  render() {
-    var btnText = 'Reset';
-    if (this.state.matches === this.state.cards.length / 2) {
-      btnText = 'You Win! Play Again?';
-    }
-    return (
-      <View className="Game">
-        <View>
-          <Button onClick={this.reset}>{btnText}</Button>
-        </View>
-        {this.renderCards(this.state.cards)}
-      </View>
-    );
-  }
+
+		return();
+	}
 }
