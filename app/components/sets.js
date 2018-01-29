@@ -17,18 +17,6 @@
 				{src:"🏎", visible: true, paired: false, clickable: false},
 				{src:"🚲", visible: true, paired: false, clickable: false},
 			],
-			'faces': [
-				{src:"😜", visible: true, paired: false, clickable: false},
-				{src:"🤓", visible: true, paired: false, clickable: false},
-				{src:"😵", visible: true, paired: false, clickable: false},
-				{src:"😂", visible: true, paired: false, clickable: false},
-				{src:"😩", visible: true, paired: false, clickable: false},
-				{src:"😘", visible: true, paired: false, clickable: false},
-				{src:"😍", visible: true, paired: false, clickable: false},
-				{src:"🤐", visible: true, paired: false, clickable: false},
-				{src:"😴", visible: true, paired: false, clickable: false},
-				{src:"🤕", visible: true, paired: false, clickable: false},
-			],
 			'animals': [
 				{src:"🐶", visible: true, paired: false, clickable: false},
 				{src:"🐭", visible: true, paired: false, clickable: false},
@@ -56,7 +44,17 @@
 				{src:"🍌", visible: true, paired: false, clickable: false},
 				{src:"🍋", visible: true, paired: false, clickable: false},
 				{src:"🍎", visible: true, paired: false, clickable: false},
+				{src:"🍺", visible: true, paired: false, clickable: false},
+				{src:"🍲", visible: true, paired: false, clickable: false},
+				{src:"🍷", visible: true, paired: false, clickable: false},
+				{src:"🍸", visible: true, paired: false, clickable: false},
+				{src:"🍹", visible: true, paired: false, clickable: false},
+				{src:"🍜", visible: true, paired: false, clickable: false},
+				{src:"🍶", visible: true, paired: false, clickable: false},
+				{src:"🍵", visible: true, paired: false, clickable: false},
+				{src:"🍝", visible: true, paired: false, clickable: false},
 			]
+
 		},
 		"medium": {
 			'buildings': [
@@ -110,17 +108,6 @@
 				{src:"🌺", visible: true, paired: false, clickable: false},
 				{src:"🌸", visible: true, paired: false, clickable: false},
 			],
-			'drinks': [
-				{src:"🍺", visible: true, paired: false, clickable: false},
-				{src:"🍻", visible: true, paired: false, clickable: false},
-				{src:"🍷", visible: true, paired: false, clickable: false},
-				{src:"🍸", visible: true, paired: false, clickable: false},
-				{src:"🍹", visible: true, paired: false, clickable: false},
-				{src:"🍾", visible: true, paired: false, clickable: false},
-				{src:"🍶", visible: true, paired: false, clickable: false},
-				{src:"🍵", visible: true, paired: false, clickable: false},
-				{src:"🍼", visible: true, paired: false, clickable: false},
-			]
 		},
 		"hard": {
 			'flags': [
@@ -155,6 +142,10 @@
 				{src:"🌗", visible: true, paired: false, clickable: false},
 				{src:"🌖", visible: true, paired: false, clickable: false},
 				{src:"🌕", visible: true, paired: false, clickable: false},
+				{src:"🌞", visible: true, paired: false, clickable: false},
+				{src:"🌛", visible: true, paired: false, clickable: false},
+				{src:"⭐", visible: true, paired: false, clickable: false},
+				{src:"💫", visible: true, paired: false, clickable: false},
 			],
 			'faces': [
 				{src:"😪", visible: true, paired: false, clickable: false},

@@ -5,7 +5,7 @@ import {
     View,
     Image,
     TouchableOpacity,
-    Picker
+    Picker,
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Button, Header } from 'react-native-elements';
@@ -13,9 +13,7 @@ import ModalDropdown from 'react-native-modal-dropdown';
 import { Dropdown } from 'react-native-material-dropdown';
 
 
-/*const OPTIONS = [{value: 'Easy'}, {value: 'Medium'}, {value: 'Hard'}];*/
-
-
+const OPTIONS = [{value: 'Easy'}, {value: 'Medium'}, {value: 'Hard'}];
 
 class HomeScreen extends Component {
 	constructor(){
@@ -47,6 +45,7 @@ class HomeScreen extends Component {
           <Image source={require('../../src/images/brain.png')} style={{height: 160, width:160}} />
 
 					<View style={styles.pickerBox}>
+
 						<Picker style={styles.pickerStyle}
 							selectedValue ={this.state.level}
 							onValueChange = {this.onValueChange.bind(this, 'level')}
@@ -56,13 +55,11 @@ class HomeScreen extends Component {
 							<Picker.Item label='Hard' value='Hard'/>
 
 						</Picker>
+
 						<Text style={styles.levelText}>Selected Level: {this.state.level}</Text>
-
-
 					</View>
 
 					<View style={styles.buttonBox}>
-
           	<Button
             	icon={{name: 'play', type: 'evilicon', size: 35}}
             	buttonStyle={{backgroundColor: "#FC5D65", borderRadius: 15, padding:15}}
@@ -114,6 +111,7 @@ const styles = StyleSheet.create({
 			textAlign: 'center',
       color: '#50CEB4',
       marginTop: 10,
+			marginBottom: 10,
 			fontWeight: 'bold'
 		},
 		buttonPlay:{
@@ -137,13 +135,12 @@ const styles = StyleSheet.create({
 		levelText: {
 			color: '#FC5D65',
 			fontSize: 18,
-			marginBottom: 10,
 			marginTop:10,
 			fontWeight: 'bold'
 		},
 		buttonBox: {
 			flex:1,
-			marginTop:25
+			marginTop:30
 		},
     tabBar: {
       backgroundColor: 'white',
