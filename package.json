@@ -8,12 +8,16 @@
   },
   "dependencies": {
     "emoji-dictionary": "^1.0.9",
+    "material-ui": "^0.20.0",
     "react": "16.2.0",
     "react-card-flip": "^0.1.1",
     "react-native": "0.52.0",
     "react-native-data-table": "^0.2.0",
+    "react-native-dropdown": "0.0.6",
     "react-native-elements": "^0.19.0",
+    "react-native-material-dropdown": "^0.7.1",
     "react-native-modal-dropdown": "^0.6.0",
+    "react-native-selectme": "^1.2.3",
     "react-native-vector-icons": "^4.5.0",
     "react-navigation": "^1.0.0-beta.27"
   },

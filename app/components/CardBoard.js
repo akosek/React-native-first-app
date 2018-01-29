@@ -13,45 +13,120 @@ import ReactCardFlip from 'react-card-flip';
 import FlipCard from 'react-native-flip-card';
 
 let images = [
-        {id:0, src:"😜", visible: false},
-        {id:1, src:"🌴", visible: false},
-        {id:2, src:"💖", visible: false},
-        {id:3, src:"😂", visible: false},
-        {id:4, src:"💩", visible: false},
-        {id:5, src:"😘", visible: false},
-        {id:6, src:"😲", visible: false},
-        {id:7, src:"🤐", visible: false},
-        {id:8, src:"😴", visible: false},
-        {id:9, src:"🤕", visible: false},
-
+  {src:"🐶", visible: true, paired: false, clickable: false},
+  {src:"🐭", visible: true, paired: false, clickable: false},
+  {src:"🐱", visible: true, paired: false, clickable: false},
+  {src:"🐹", visible: true, paired: false, clickable: false},
+  {src:"🐰", visible: true, paired: false, clickable: false},
+  {src:"🐼", visible: true, paired: false, clickable: false},
+  {src:"🐨", visible: true, paired: false, clickable: false},
+  {src:"🐯", visible: true, paired: false, clickable: false},
+  {src:"🦁", visible: true, paired: false, clickable: false},
+  {src:"🐮", visible: true, paired: false, clickable: false},
+  {src:"🐷", visible: true, paired: false, clickable: false},
+  {src:"🐵", visible: true, paired: false, clickable: false},
+  {src:"🐸", visible: true, paired: false, clickable: false}
     ];
+
+    let cardImages = images.concat(images);
+
+    cardImages.sort(() => {
+      return(0.5 - Math.random());
+    })
+
+    let finalCards = cardImages.map((_card,index) => ({
+      id: index,
+      src: _card.src,
+      visible: _card.visible,
+      paired: _card.paired,
+      clickable: _card.clickable})
+    );
+
+    let tapNum = false;
+    let tmpImage = '';
 
 export class CardBoard extends React.Component {
 
-  render() {
 
-    let cardImages = images.concat(images);
-          cardImages.sort(
-            () => {
-                return(0.5 - Math.random());
-                }
-          )
+    constructor(props){
+      super(props);
+      this.state = {cards: finalCards};
+      this.updateBoard = this.updateBoard.bind(this);
+    }
 
-     let pickedImages = cardImages.map((image, index) =>
-          <Card
-              key={image.index}
-              image={image.src}
-              visible={image.visible}
-          />
-      );
+    updateBoard(newPressed) {
 
-     return (
-       <View style={styles.mainContainer}>
-        <Text>{pickedImages}</Text>
-      </View>);
+      console.log(newPressed);
 
+      this.state.cards.forEach(function (arrayItem)
+      {
+        if(arrayItem.id == newPressed && !tapNum){
+          arrayItem.visible = true;
+          arrayItem.clickable = false;
+          tmpImage = arrayItem.src;
+          tapNum = true;
+        }
+
+        else if(arrayItem.id == newPressed && tapNum){
+          arrayItem.visible = true;
+          arrayItem.clickable = false;
+          if (tmpImage == arrayItem.src){
+            alert('match');
+          }
+          tapNum=false;
+        }
+      });
+
+      tapNum = true;
+      this.setState({cards: this.state.cards});
+
+      }
+
+    componentDidMount () {
+
+      this.state.cards.forEach(function (arrayItem)
+      {
+          arrayItem.visible = false;
+          arrayItem.clickable = true;
+      });
+
+      setTimeout(function(){
+        this.setState({cards: this.state.cards});
+      }.bind(this), 3000);
+    }
+
+    render() {
+
+    //   console.log(cardImages);
+
+       let debug = false;
+
+       //DEBUG FUNCTION DELETE LATER
+       if (debug) {
+         setInterval(function(){
+           console.log('last pressed ' + this.state.lastPressed);;
+         }.bind(this), 5000);
+       }
+
+    //   console.log(this.state);
+       let pickedImages = this.state.cards.map((image,index) =>
+            <Card key={index}
+                  image={image.src}
+                  id={image.id}
+                  visible={image.visible}
+                  clickable={image.clickable}
+                  paired={image.paired}
+                  onPress={this.updateBoard}/>
+        );
+
+       return (
+         <View style={styles.container}>
+          <Text>{pickedImages}</Text>
+        </View>);
+    }
   }
-}
+
+
 
 class Timer extends React.Component {
   constructor(props){
@@ -73,7 +148,7 @@ class Timer extends React.Component {
     startTimer(){
       this.setState({on:true});
       this.timerId = setInterval(()=> {this.update();
-      }, 2000);
+      }, 4000);
     }
 
     pauseTimer(){
@@ -85,66 +160,52 @@ class Timer extends React.Component {
     }
 }
 
-
 class Card extends React.Component {
 
-          constructor(props){
-            super(props);
-            this.state = {visible: false};
-          }
+  constructor(props){
+    super(props);
+    this.toogleCard = this.toogleCard.bind(this);
+    }
 
-          onPress = () => {
-            console.log('pressed ' + this.props.image);
 
-          }
+  toogleCard(){
+    if (this.props.clickable)
+      this.props.onPress(this.props.id);
+  }
 
-          toogleCard = () => {
-            this.setState({visible: !this.state.visible});
-            console.log(this.props.image);
-          }
+  render() {
+    return (
 
-          render() {
-      /*        setTimeout(function(){
-                  this.setState({visible:true});
-                }.bind(this),3000);*/
+      <TouchableHighlight style={styles.imageContainer} onPress={this.toogleCard}>
+        <Text style={this.props.visible ? styles.imageStyle: styles.imageHide}> {this.props.image} </Text>
+      </TouchableHighlight>
 
-            return (
-              <TouchableHighlight style={styles.imageContainer} onPress={this.toogleCard.bind(this)}>
-                <Text style={this.state.visible ? styles.imageHide: styles.imageStyle}>
-                   {this.props.image} </Text>
-
-              </TouchableHighlight>
-            );
-          }
-      }
+          );
+        }
+    }
 
 
 const styles = StyleSheet.create({
-  mainContainer: {
+  container: {
     flex: 1,
-    width: '100%',
-    height:'100%',
     alignItems: 'center',
-    marginTop: 50,
+    justifyContent : 'center',
+    backgroundColor: 'white'
   },
-	imageContainer: {
-    width: 80,
-    height: 80,
+  imageContainer: {
+    flex:1,
+    width: 70,
+    height: 70,
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#BEE1D2',
-	},
-	imageStyle: {
-    fontSize: 50,
+    backgroundColor: '#f7d867'
+  },
+  imageHide: {
+    display: 'none',
+  },
+  imageStyle: {
+    fontSize: 40,
     alignItems: 'center',
 	},
-  imageHide: {
-    fontSize: 50,
-    display:'none',
-  },
-  something: {
-    height: 30,
-    width: 30,
-  },
 });

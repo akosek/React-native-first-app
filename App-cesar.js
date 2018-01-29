@@ -7,90 +7,87 @@ import {StyleSheet,
         Alert
 } from 'react-native';
 
-/*let images = [
-        {id:0, src:"😜", visible: true, paired: false, clickable: false},
-        {id:1, src:"🌴", visible: true, paired: false, clickable: false},
-        {id:2, src:"💖", visible: true, paired: false, clickable: false},
-        {id:3, src:"😂", visible: true, paired: false, clickable: false},
-        {id:4, src:"💩", visible: true, paired: false, clickable: false},
-        {id:5, src:"😘", visible: true, paired: false, clickable: false},
-        {id:6, src:"👺", visible: true, paired: false, clickable: false},
-        {id:7, src:"🤐", visible: true, paired: false, clickable: false},
-        {id:8, src:"😴", visible: true, paired: false, clickable: false},
-        {id:9, src:"🤕", visible: true, paired: false, clickable: false},
-    ];*/
-
-    let images = [
-            {src:"😜", visible: true, paired: false, clickable: false},
-            {src:"🌴", visible: true, paired: false, clickable: false},
-            {src:"💖", visible: true, paired: false, clickable: false},
-            {src:"😂", visible: true, paired: false, clickable: false},
-            {src:"💩", visible: true, paired: false, clickable: false},
-            {src:"😘", visible: true, paired: false, clickable: false},
-            {src:"👺", visible: true, paired: false, clickable: false},
-            {src:"🤐", visible: true, paired: false, clickable: false},
-            {src:"😴", visible: true, paired: false, clickable: false},
-            {src:"🤕", visible: true, paired: false, clickable: false},
-        ];
+let images = [
+        {src:"😜", visible: true, paired: false, clickable: false},
+        {src:"🌴", visible: true, paired: false, clickable: false},
+        {src:"💖", visible: true, paired: false, clickable: false},
+        {src:"😂", visible: true, paired: false, clickable: false},
+        {src:"💩", visible: true, paired: false, clickable: false},
+        {src:"😘", visible: true, paired: false, clickable: false},
+        {src:"👺", visible: true, paired: false, clickable: false},
+        {src:"🤐", visible: true, paired: false, clickable: false},
+        {src:"😴", visible: true, paired: false, clickable: false},
+        {src:"🤕", visible: true, paired: false, clickable: false},
+        {src:"🤗", visible: true, paired: false, clickable: false},
+				{src:"😵", visible: true, paired: false, clickable: false},
+				{src:"🤕", visible: true, paired: false, clickable: false},
+				{src:"😛", visible: true, paired: false, clickable: false},
+				{src:"🤒", visible: true, paired: false, clickable: false},
+				{src:"😭", visible: true, paired: false, clickable: false},
+				{src:"🤐", visible: true, paired: false, clickable: false},
+				{src:"😇", visible: true, paired: false, clickable: false},
+				{src:"🤓", visible: true, paired: false, clickable: false},
+				{src:"😘", visible: true, paired: false, clickable: false},
+				{src:"😗", visible: true, paired: false, clickable: false},
+				{src:"🤔", visible: true, paired: false, clickable: false},
+        {src:"🐷", visible: true, paired: false, clickable: false},
+				{src:"🐵", visible: true, paired: false, clickable: false},
+    ];
 
         let cardImages = images.concat(images);
+
         cardImages.sort(() => {
           return(0.5 - Math.random());
         })
 
-        for (var j = 0; j < cardImages.length; j++){
-          cardImages[j].caca = j;
-        }
+        let finalCards = cardImages.map((_card,index) => ({
+          id: index,
+          src: _card.src,
+          visible: _card.visible,
+          paired: _card.paired,
+          clickable: _card.clickable})
+        );
 
-        console.log(cardImages);
-
-//console.log(cardImages);
+        let tapNum = false;
+        let tmpImage = '';
 
 export default class App extends React.Component {
 
   constructor(props){
     super(props);
-    this.state = {cards: cardImages};
+    this.state = {cards: finalCards};
     this.updateBoard = this.updateBoard.bind(this);
   }
 
   updateBoard(newPressed) {
 
-  //  let flippedCard = this.state.cards.filter(card => card.src == newPressed);
-  //  let notFlippedCards = this.state.cards.filter(card => card.src != newPressed);
-
+    console.log(newPressed);
 
     this.state.cards.forEach(function (arrayItem)
     {
-      if(arrayItem.id == newPressed){
+      if(arrayItem.id == newPressed && !tapNum){
         arrayItem.visible = true;
+        arrayItem.clickable = false;
+        tmpImage = arrayItem.src;
+        tapNum = true;
+      }
+
+      else if(arrayItem.id == newPressed && tapNum){
+        arrayItem.visible = true;
+        arrayItem.clickable = false;
+        if (tmpImage == arrayItem.src){
+          alert('match');
+        }
+        tapNum=false;
       }
     });
 
+
+    tapNum = true;
     this.setState({cards: this.state.cards});
 
 
     }
-
-
-  /*  this.setState({lastPressed: this.state.lastPressed.concat(newPressed)});
-    if (this.state.lastPressed.length == 2){
-      console.log('dos pulsados');
-      if (this.state.lastPressed[0] === this.state.lastPressed[1]){
-        console.log('pareja correcta');
-      }
-      this.setState({lastPressed: []});
-    }*/
-
-
-  //  const newPair = this.state.lastPressed.concat(newPressed).slice(1);
-  //  this.setState({lastPressed: newPair});
-  //  if (this.state.lastPressed[0] === this.state.lastPressed[1]){
-  //    console.log('same images');
-  //  }
-  //  console.log('last pressed ' + this.state.lastPressed);
-
-
 
   componentDidMount () {
 
@@ -102,7 +99,7 @@ export default class App extends React.Component {
 
     setTimeout(function(){
       this.setState({cards: this.state.cards});
-    }.bind(this), 5000);
+    }.bind(this), 1000);
   }
 
   render() {
@@ -118,10 +115,12 @@ export default class App extends React.Component {
        }.bind(this), 5000);
      }
 
-     let pickedImages = this.state.cards.map((image,id) =>
-          <Card key={id}
+  //   console.log(this.state);
+
+     let pickedImages = this.state.cards.map((image,index) =>
+          <Card key={index}
                 image={image.src}
-                id={id}
+                id={image.id}
                 visible={image.visible}
                 clickable={image.clickable}
                 paired={image.paired}
@@ -141,6 +140,7 @@ class Card extends React.Component {
       super(props);
       this.toogleCard = this.toogleCard.bind(this);
       }
+
 
 
     toogleCard(){
@@ -165,8 +165,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'red'
   },
   imageContainer: {
-    width: 80,
-    height: 80,
+    width: 60,
+    height: 60,
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     display: 'none',
   },
   imageStyle: {
-    fontSize: 60,
+    fontSize: 35,
     alignItems: 'center',
 	},
 });

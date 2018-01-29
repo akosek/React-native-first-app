@@ -4,16 +4,22 @@ import {
     Text,
     View,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    Picker
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Button, Header } from 'react-native-elements';
 import ModalDropdown from 'react-native-modal-dropdown';
+import { Dropdown } from 'react-native-material-dropdown';
 
 
-const OPTIONS = ['Easy', 'Medium', 'Hard'];
+const OPTIONS = [{value: 'Easy'}, {value: 'Medium'}, {value: 'Hard'}];
 
 class HomeScreen extends Component {
+
+
+  handleChange = (event, index, value) => this.setState({value});
+
     render() {
 			return(
       /*  <View>
@@ -30,13 +36,19 @@ class HomeScreen extends Component {
           </View>
 
         <View style={styles.body}>
-          <Image source={require('../../src/images/brain.png')} style={{marginBottom:30}}/>
+          <Image source={require('../../src/images/brain.png')} style={{marginBottom:10}}/>
 
 
-          <ModalDropdown style={styles.dropdownLevel}
-                    options={OPTIONS}
-                    onSelect={(idx, value) => this._dropdown_6_onSelect(idx, value)} />
-
+          <View style={styles.dropdownView}>
+            <Dropdown style={styles.dropStyle}
+              label='Level'
+              data={OPTIONS}
+              itemPadding={10}
+              autoWidth = 'true'
+              baseColor='#21b7a8'
+            
+            />
+          </View>
 
           <Button
             icon={{name: 'play', type: 'evilicon', size: 35}}
@@ -108,7 +120,6 @@ const styles = StyleSheet.create({
       borderColor: 'cornflowerblue',
       borderWidth: 2,
       borderRadius: 3,
-      color: 'white',
       backgroundColor: 'cornflowerblue',
     },
     tabBar: {
@@ -126,5 +137,17 @@ const styles = StyleSheet.create({
     },
     tabText: {
       color: '#ea4d57'
+    },
+    dropdownView: {
+      flexDirection: 'row',
+      marginBottom: 50,
+      alignItems:'center',
+    },
+    cos: {
+        flex:1,
+    },
+    dropStyle: {
+      width: 40,
+      padding: 50
     }
 });

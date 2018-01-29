@@ -30,3 +30,7 @@ class Game extends React.Component {
 		return();
 	}
 }
+<ModalDropdown style={styles.dropdownLevel}
+          options={OPTIONS}
+          onSelect={(idx, value) => this._dropdown_6_onSelect(idx, value)}>
+</ModalDropdown>
