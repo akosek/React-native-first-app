@@ -34,3 +34,15 @@ class Game extends React.Component {
           options={OPTIONS}
           onSelect={(idx, value) => this._dropdown_6_onSelect(idx, value)}>
 </ModalDropdown>
+
+
+<View style={styles.dropdownView}>
+  <Dropdown style={styles.dropStyle}
+    label='Level'
+    data={OPTIONS}
+    itemPadding={10}
+    autoWidth = 'true'
+    baseColor='#21b7a8'
+
+  />
+</View>

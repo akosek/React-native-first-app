@@ -13,12 +13,20 @@ import ModalDropdown from 'react-native-modal-dropdown';
 import { Dropdown } from 'react-native-material-dropdown';
 
 
-const OPTIONS = [{value: 'Easy'}, {value: 'Medium'}, {value: 'Hard'}];
+/*const OPTIONS = [{value: 'Easy'}, {value: 'Medium'}, {value: 'Hard'}];*/
+
+
 
 class HomeScreen extends Component {
-
-
-  handleChange = (event, index, value) => this.setState({value});
+	constructor(){
+		super();
+		this.state = {
+			level: 'Easy'
+		}
+	}
+	onValueChange(key, value){
+		this.setState({level: value});
+	}
 
     render() {
 			return(
@@ -36,28 +44,33 @@ class HomeScreen extends Component {
           </View>
 
         <View style={styles.body}>
-          <Image source={require('../../src/images/brain.png')} style={{marginBottom:10}}/>
+          <Image source={require('../../src/images/brain.png')} style={{height: 160, width:160}} />
+
+					<View style={styles.pickerBox}>
+						<Picker style={styles.pickerStyle}
+							selectedValue ={this.state.level}
+							onValueChange = {this.onValueChange.bind(this, 'level')}
+							>
+							<Picker.Item label='Easy' value='Easy'/>
+							<Picker.Item label='Medium' value='Medium'/>
+							<Picker.Item label='Hard' value='Hard'/>
+
+						</Picker>
+						<Text style={styles.levelText}>Selected Level: {this.state.level}</Text>
 
 
-          <View style={styles.dropdownView}>
-            <Dropdown style={styles.dropStyle}
-              label='Level'
-              data={OPTIONS}
-              itemPadding={10}
-              autoWidth = 'true'
-              baseColor='#21b7a8'
-            
-            />
-          </View>
+					</View>
 
-          <Button
-            icon={{name: 'play', type: 'evilicon', size: 35}}
-            buttonStyle={{backgroundColor: "#FC5D65", borderRadius: 15, padding:15}}
-            textStyle={{textAlign: 'center'}}
-            title={`PLAY`}
-            onPress={()=>this.props.navigation.navigate('GameScreen')}
-          />
+					<View style={styles.buttonBox}>
 
+          	<Button
+            	icon={{name: 'play', type: 'evilicon', size: 35}}
+            	buttonStyle={{backgroundColor: "#FC5D65", borderRadius: 15, padding:15}}
+            	textStyle={{textAlign: 'center'}}
+            	title={`PLAY`}
+            	onPress={()=>this.props.navigation.navigate('GameScreen')}
+          	/>
+					</View>
         </View>
 
 
@@ -79,8 +92,6 @@ class HomeScreen extends Component {
                 color='#ea4d57' size={30}/>
                 <Text style={styles.tabText}>Settings</Text>
             </TouchableOpacity>
-
-
           </View>
 
 				</View>
@@ -96,32 +107,44 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     navBar: {
-      marginBottom: 40
+      marginBottom: 20
     },
 		helloText: {
-			fontSize: 25,
+			fontSize: 22,
 			textAlign: 'center',
       color: '#50CEB4',
-      marginTop: 10
+      marginTop: 10,
+			fontWeight: 'bold'
 		},
 		buttonPlay:{
 			fontSize: 40,
 			backgroundColor: '#000',
 		},
     body: {
-      flex:1,
+      flex:2,
       backgroundColor: 'white',
       alignItems: 'center',
     },
-    dropdownLevel: {
-      marginBottom:10,
-      height: 30,
-      width: 80,
-      borderColor: 'cornflowerblue',
-      borderWidth: 2,
-      borderRadius: 3,
-      backgroundColor: 'cornflowerblue',
-    },
+		pickerBox: {
+			flex: 1,
+			marginBottom: 90,
+		},
+		pickerStyle: {
+			top:10,
+			maxHeight: 10,
+			borderColor: '#FC5D65',
+		},
+		levelText: {
+			color: '#FC5D65',
+			fontSize: 18,
+			marginBottom: 10,
+			marginTop:10,
+			fontWeight: 'bold'
+		},
+		buttonBox: {
+			flex:1,
+			marginTop:25
+		},
     tabBar: {
       backgroundColor: 'white',
       height: 50,
@@ -142,12 +165,5 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       marginBottom: 50,
       alignItems:'center',
-    },
-    cos: {
-        flex:1,
-    },
-    dropStyle: {
-      width: 40,
-      padding: 50
     }
 });
