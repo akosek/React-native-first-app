@@ -54,7 +54,6 @@
 				{src:"🍵", visible: true, paired: false, clickable: false},
 				{src:"🍝", visible: true, paired: false, clickable: false},
 			]
-
 		},
 		"medium": {
 			'buildings': [
@@ -107,7 +106,7 @@
 				{src:"🌵", visible: true, paired: false, clickable: false},
 				{src:"🌺", visible: true, paired: false, clickable: false},
 				{src:"🌸", visible: true, paired: false, clickable: false},
-			],
+			]
 		},
 		"hard": {
 			'flags': [
@@ -174,24 +173,3 @@
 		}
 	}
 }
-
-
-
-
-
-
-
-
-let images = [
-        {id:0, src:"😜", visible: false},
-        {id:1, src:"🌴", visible: false},
-        {id:2, src:"💖", visible: false},
-        {id:3, src:"😂", visible: false},
-        {id:4, src:"💩", visible: false},
-        {id:5, src:"😘", visible: false},
-        {id:6, src:"😲", visible: false},
-        {id:7, src:"🤐", visible: false},
-        {id:8, src:"😴", visible: false},
-        {id:9, src:"🤕", visible: false},
-
-    ];
