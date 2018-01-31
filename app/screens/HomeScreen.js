@@ -6,28 +6,32 @@ import {
     Image,
     TouchableOpacity,
     Picker,
+		Item
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Button, Header } from 'react-native-elements';
-import ModalDropdown from 'react-native-modal-dropdown';
-import { Dropdown } from 'react-native-material-dropdown';
+import { Sets } from '../components/Sets.js';
 
+/*/*import { Dropdown } from 'react-native-material-dropdown';*/
 
-const OPTIONS = [{value: 'Easy'}, {value: 'Medium'}, {value: 'Hard'}];
+let pickedLevel = '';
 
 class HomeScreen extends Component {
-	constructor(){
-		super();
+	constructor(props){
+		super(props);
 		this.state = {
-			level: 'Easy'
+			level: 'Medium'
 		}
-	}
-	onValueChange(key, value){
-		this.setState({level: value});
 	}
 
     render() {
-			return(
+
+    pickedLevel = this.state.level;
+
+    console.log("this is the level from home " + pickedLevel);
+
+      return(
+
       /*  <View>
           <Header
             leftComponent={{ icon: 'menu', color: '#fff' }}
@@ -46,15 +50,13 @@ class HomeScreen extends Component {
 
 					<View style={styles.pickerBox}>
 
-						<Picker style={styles.pickerStyle}
-							selectedValue ={this.state.level}
-							onValueChange = {this.onValueChange.bind(this, 'level')}
-							>
-							<Picker.Item label='Easy' value='Easy'/>
-							<Picker.Item label='Medium' value='Medium'/>
-							<Picker.Item label='Hard' value='Hard'/>
-
-						</Picker>
+            <Picker
+              selectedValue={this.state.level}
+              onValueChange={(itemValue, itemIndex) => this.setState({level: itemValue})}>
+              <Picker.Item label='Easy' value='Easy'/>
+              <Picker.Item label='Medium' value='Medium'/>
+              <Picker.Item label='Hard' value='Hard'/>
+            </Picker>
 
 						<Text style={styles.levelText}>Selected Level: {this.state.level}</Text>
 					</View>
@@ -65,11 +67,10 @@ class HomeScreen extends Component {
             	buttonStyle={{backgroundColor: "#FC5D65", borderRadius: 15, padding:15}}
             	textStyle={{textAlign: 'center'}}
             	title={`PLAY`}
-            	onPress={()=>this.props.navigation.navigate('GameScreen')}
+            	onPress={()=>this.props.navigation.navigate('GameScreen', {levelName: this.state.level} )}
           	/>
 					</View>
         </View>
-
 
           <View style={styles.tabBar}>
             <TouchableOpacity style={styles.tabItem}>
@@ -92,9 +93,14 @@ class HomeScreen extends Component {
           </View>
 
 				</View>
+
 		);
+
 	}
 }
+
+console.log("This is the level outside " + pickedLevel);
+export const levelName = pickedLevel;
 
 export default HomeScreen;
 
